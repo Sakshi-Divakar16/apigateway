@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Theatres</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">Manage Theatres</h2>
+
+        <!-- Form to Add Theatre -->
+        <form action="/add-theatre" method="post" class="mb-4">
+            <h4>Add Theatre</h4>
+            <div class="row mb-2">
+                <div class="col">
+                    <input type="text" name="theatreName" class="form-control" placeholder="Theatre Name" required>
+                </div>
+                <div class="col">
+                    <input type="number" name="capacity" class="form-control" placeholder="Capacity" required>
+                </div>
+                <div class="col">
+                    <input type="number" name="screens" class="form-control" placeholder="Screens" required>
+                </div>
+            </div>
+
+            <h5>Address</h5>
+            <div class="row mb-3">
+                <div class="col">
+                    <input type="text" name="address.country" class="form-control" placeholder="Country" required>
+                </div>
+                <div class="col">
+                    <input type="text" name="address.state" class="form-control" placeholder="State" required>
+                </div>
+                <div class="col">
+                    <input type="text" name="address.city" class="form-control" placeholder="City" required>
+                </div>
+                <div class="col">
+                    <input type="text" name="address.addressLine" class="form-control" placeholder="Address Line" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Add Theatre</button>
+        </form>
+
+        <!-- Theatre List -->
+        <h4>Theatre List</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Theatre Name</th>
+                    <th>Capacity</th>
+                    <th>Screens</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="theatre : ${theatres}">
+                    <td th:text="${theatre['theatreId']}"></td>
+                    <td th:text="${theatre['theatreName']}"></td>
+                    <td th:text="${theatre['capacity']}"></td>
+                    <td th:text="${theatre['screens']}"></td>
+                    <td>
+                        <span th:text="${theatre['address']['city']} + ', ' + ${theatre['address']['state']}"></span>
+                    </td>
+                    <td>
+                        <a th:href="@{/edit-theatre/{id}(id=${theatre['theatreId']})}" class="btn btn-warning btn-sm">Edit</a>
+                        <form th:action="@{/delete-theatre/{id}(id=${theatre['theatreId']})}" method="post" class="d-inline">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

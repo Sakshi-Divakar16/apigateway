@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Shows</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">Manage Shows</h2>
+
+        <!-- Show Details -->
+        <h4>Show Details</h4>
+        <div class="row mb-4">
+            <div class="col">
+                <p><strong>Movie ID:</strong> <span th:text="*{movieId}"></span></p>
+            </div>
+            <div class="col">
+                <p><strong>Theatre ID:</strong> <span th:text="*{theatreId}"></span></p>
+            </div>
+            <div class="col">
+                <p><strong>Show Date & Time:</strong> <span th:text="*{showDatetime}"></span></p>
+            </div>
+        </div>
+
+        <!-- Form to Edit Show -->
+        <h4>Edit Show</h4>
+        <form th:action="@{/manage_movie_show}" th:object="${MovieShowObj}"   method="post" class="mb-4">
+			<input type="hidden" th:field="*{showId}" />
+
+            <div class="row mb-2">
+                <div class="col">
+                    <label for="movieId">Movie ID</label>
+                    <input type="number" name="movieId" id="movieId" class="form-control" th:value="*{movieId}" required>
+                </div>
+                <div class="col">
+                    <label for="theatreId">Theatre ID</label>
+                    <input type="number" name="theatreId" id="theatreId" class="form-control" th:value="*{theatreId}" required>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <label for="showDatetime">Show Date & Time</label>
+                    <input type="datetime-local" name="showDatetime" id="showDatetime" class="form-control" th:value="*{showDatetime}" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+
+        <!-- Show List -->
+        <h4>Show List</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Movie ID</th>
+                    <th>Theatre ID</th>
+                    <th>Show Date & Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+			<tbody>
+			    <tr th:each="show : ${shows}">
+			        <td th:text="${show.movieId}"></td>
+			        <td th:text="${show.theatreId}"></td>
+			        <td th:text="${#dates.format(show.showDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+			        <td>
+			            <a th:href="@{/edit/{id}(id=*{showId})}" class="btn btn-warning btn-sm">Edit</a>
+			            <form th:action="@{/delete/{id}(id=*{showId})}" method="post" class="d-inline">
+			                <input type="hidden" name="_method" value="DELETE">
+			                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+			            </form>
+			        </td>
+			    </tr>
+			</tbody>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

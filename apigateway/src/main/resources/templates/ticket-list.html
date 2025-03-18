@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+    <title>Tickets List</title>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h2 class="text-center text-danger">🎟️ Tickets List</h2>
+    <table class="table table-responsive table-hover mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>Ticket ID</th>
+            <th>Show ID</th>
+            <th>Seat</th>
+            <th>Amount</th>
+            <th>Purchase Date</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+			<tr th:each="ticket : ${tickets}">
+			    <td th:text="${ticket['ticket_id']}"></td>
+			    <td th:text="${ticket['show_id']}"></td>
+			    <td th:text="${ticket['seat_id']}"></td>
+			    <td th:text="${ticket['amount']}"></td>
+			    <td th:text="${ticket['purchase_date']}"></td>
+			    <td th:text="${ticket['status']}"></td>
+			</tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

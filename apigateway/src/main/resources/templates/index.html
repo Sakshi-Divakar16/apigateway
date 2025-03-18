@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+    <title>CineBuzz - Home</title>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container text-center mt-5">
+    <h1 class="text-primary">🍿 Welcome to CineBuzz 🎥</h1>
+    <p class="lead">Your one-stop destination for movies, theatres, and tickets.</p>
+
+    <div class="d-flex justify-content-center mt-4">
+        <a href="/movies" class="btn btn-primary mx-2">🎬 View Movies</a>
+        <a href="/theatres" class="btn btn-success mx-2">🎭 View Theatres</a>
+        <a href="/tickets" class="btn btn-danger mx-2">🎟️ View Tickets</a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

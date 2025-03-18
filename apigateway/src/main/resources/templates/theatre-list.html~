@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Theatres List</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Theatre List</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Capacity</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Address Line</th>
+        <th>Screens</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="theatre : ${theatres}">
+        <td th:text="${theatre.theatreId}">1</td>
+        <td th:text="${theatre.theatreName}">PVR Cinemas</td>
+        <td th:text="${theatre.capacity}">250</td>
+        <td th:text="${theatre.address.city}">Mumbai</td>
+        <td th:text="${theatre.address.state}">Maharashtra</td>
+        <td th:text="${theatre.address.country}">India</td>
+        <td th:text="${theatre.address.addressLine}">Bandra West, Mumbai</td>
+        <td th:text="${theatre.screen}">0</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

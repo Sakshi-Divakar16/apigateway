@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard - Movie Ticket Booking</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .sidebar {
+            background: #343a40;
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+            position: fixed;
+            width: 250px;
+        }
+        .sidebar h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            color: #dcdcdc;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        .sidebar a:hover {
+            background: #007bff;
+            border-radius: 5px;
+            color: white;
+        }
+        .main-content {
+            margin-left: 260px;
+            padding: 40px;
+        }
+        .dashboard-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .dashboard-button:hover {
+            opacity: 0.8;
+        }
+        .theatre-btn { background: #007bff; }
+        .movie-btn { background: #dc3545; }
+        .show-btn { background: #28a745; }
+        .seat-btn { background: #ffc107; }
+        .tier-btn { background: #6610f2; }
+        .offer-btn { background: #17a2b8; }
+    </style>
+	<script>
+	        function logout() {
+	            fetch('/logout', { method: 'POST' }) // Calls the Spring Security logout endpoint
+	                .then(response => {
+	                    if (response.ok) {
+	                        window.location.href = "/home"; // Redirect to home page after logout
+	                    }
+	                })
+	                .catch(error => console.error('Logout failed:', error));
+	        }
+	    </script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="#"><i class="fas fa-cogs"></i> Settings</a>
+        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+		
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="mb-4">Admin Dashboard</h1>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <a href="/manage_theatre" class="dashboard-button theatre-btn">Manage Theatres</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/manage_movies" class="dashboard-button movie-btn">Manage Movies</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/manage_movie_show" class="dashboard-button show-btn">Manage Shows</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/manage_seats" class="dashboard-button seat-btn">Manage Seats</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/manage_tier" class="dashboard-button tier-btn">Manage Tiers</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/manage_offer" class="dashboard-button offer-btn">Manage Offers</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

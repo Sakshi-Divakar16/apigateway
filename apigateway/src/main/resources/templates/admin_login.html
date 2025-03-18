@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | CineBuzz</title>
+
+    <!-- Bootstrap 5 CSS -->
+<link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+ 
+    <!-- Custom Styles -->
+<style>
+        /* Background Image */
+        body {
+            background: url('image/image.png') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        /* Dark overlay effect */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            z-index: 0;
+        }
+ 
+        /* Login box with glass effect */
+        .login-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 350px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+ 
+        /* Input field styles */
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+        }
+ 
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+ 
+        /* Login button with animation */
+        .btn-login {
+            background: #ff4d4d;
+            border: none;
+            transition: 0.3s ease-in-out;
+        }
+ 
+        .btn-login:hover {
+            background: #e60000;
+            transform: scale(1.05);
+        }
+ 
+        .form-group {
+            margin-bottom: 20px;
+        }
+ 
+        /* Link styles */
+        a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+</head>
+<body>
+    <div class="login-container">
+        <h3 class="text-center">Welcome to CineBuzz</h3>
+        <p class="text-center">Login to continue</p>
+        <form th:action="@{/admin_login}" th:object="${loginForm}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" th:field="*{username}" placeholder="Enter username" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" th:field="*{password}" placeholder="Enter password" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+            <button type="submit" class="btn btn-login w-100">Login</button>
+            <p th:if="${error}" th:text="${error}" class="text-danger mt-2 text-center"></p>
+            <p th:if="${message}" th:text="${message}" class="text-success mt-2 text-center"></p>
+        </form>
+    </div>
+</body>
+</html>

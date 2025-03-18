@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+    <title>Theatres List</title>
+    <style>
+        .theatre-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            background: #f8f9fa;
+        }
+        .theatre-card:hover {
+            transform: scale(1.05);
+        }
+        .card-title {
+            font-weight: bold;
+            color: #dc3545;
+        }
+        .card-body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h2 class="text-center text-danger">🎭 Theatres List</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-4 mb-4" th:each="theatre : ${theatres}">
+            <div class="card theatre-card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${theatre.theatreName}"></h5>
+                    <p class="card-text"><strong>Capacity:</strong> <span th:text="${theatre.capacity}"></span> seats</p>
+                    <p class="card-text"><strong>City:</strong> <span th:text="${theatre.address.city}"></span></p>
+                    <p class="card-text"><strong>State:</strong> <span th:text="${theatre.address.state}"></span></p>
+                    <p class="card-text"><strong>Country:</strong> <span th:text="${theatre.address.country}"></span></p>
+                    <p class="card-text"><strong>Address:</strong> <span th:text="${theatre.address.addressLine}"></span></p>
+                    <p class="card-text"><strong>Screens:</strong> <span th:text="${theatre.screen}"></span></p>
+                    <button class="btn btn-danger">View Shows</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

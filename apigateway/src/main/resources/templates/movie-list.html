@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+    <title>Movies List</title>
+    <style>
+        .movie-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+        .card-title {
+            font-weight: bold;
+        }
+        .card-body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary">🎬 Movies List</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-4 mb-4" th:each="movie : ${movies}">
+            <div class="card movie-card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${movie.movieName}"></h5>
+                    <p class="card-text"><strong>Genre:</strong> <span th:text="${movie.genre}"></span></p>
+                    <p class="card-text"><strong>Duration:</strong> <span th:text="${movie.duration}"></span> mins</p>
+                    <p class="card-text text-success"><strong>Price:</strong> ₹<span th:text="${movie.ticketBasePrice}"></span></p>
+                    <button class="btn btn-primary">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
